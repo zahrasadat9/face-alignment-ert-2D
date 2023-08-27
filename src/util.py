@@ -29,12 +29,14 @@ def configure_logging(logger_name):
 
 def computer_error(shape1,gt_shape):
     # distance between eyes
+    # 🖐🏻 right eye is 45
     eye_dis = np.linalg.norm(gt_shape.points[36]-gt_shape.points[45])
+    # 🖐🏻 norm of each column, and retrn a matrix with n colmns
     return np.linalg.norm(shape1.points-gt_shape.points, axis=1).mean()/eye_dis
 
 def transform_to_mean_shape(src, mean_shape):
     centered = PointCloud(src.points - src.centre(), copy=False)
-
+    # 🖐🏻 finds the similarity transformation which converts these two
     return AlignmentSimilarity(centered, mean_shape)
 
 def normalize(ret):
